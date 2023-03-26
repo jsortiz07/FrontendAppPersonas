@@ -13,6 +13,7 @@ export class PaisesService {
     private  httpClient: HttpClient
   ) { }
 
+  //el observable recopila los cambios a futuro
   public getAllPaises(): Observable<any>{
     return this.httpClient.get(this.API_SERVER);
   }

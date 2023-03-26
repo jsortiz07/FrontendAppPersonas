@@ -11,7 +11,7 @@ export class PersonaService {
 
   constructor(private  httpClient: HttpClient) { }
 
-
+ 
   public getAllPersonas():Observable<any>{
     return this.httpClient.get(this.API_SERVER);
   }
@@ -19,5 +19,9 @@ export class PersonaService {
 
   public savePersona(persona:any): Observable<any>  {
     return this.httpClient.post(this.API_SERVER,persona);
+  }
+
+  public deletePersona(id): Observable<any> {
+    return this.httpClient.delete(this.API_SERVER + "delete/"+id);
   }
 }

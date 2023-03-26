@@ -29,9 +29,11 @@ export class AppComponent implements OnInit {
 
   }
   // Se construye el formulario y se invocan las operaciones que se realizan desde cada service
+  // el metodo subscribe sirve para iniciar la ejecucion de un metodo Observable
 
   ngOnInit(): void {
     this.personaForm = this.fb.group({
+      id : [''],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       edad: ['', Validators.required],
@@ -69,7 +71,32 @@ export class AppComponent implements OnInit {
 
     },
       error => { console.error(error) }
-    )
+    );
+  }
+
+  eliminar(persona){
+    this.personaService.deletePersona(persona.id).subscribe(resp =>{
+      console.log(resp)
+        if(resp == true){
+          this.personas.pop(persona)
+        }
+        
+      
+    },
+    error => { console.error(error) }
+    );
+  }
+
+  editar (persona){
+    this.personaForm.setValue({
+      id : persona.id,
+      nombre: persona.nombre,
+      apellido: persona.apellido,
+      edad: persona.edad,
+      pais: persona.pais,
+      estado: persona.estado,
+
+    })
   }
 
   
